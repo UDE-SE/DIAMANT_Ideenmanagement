@@ -1,4 +1,4 @@
-# Diamant employee suggestion system
+# Diamant Idea Management System
 
 This project was developed as part of the research project DIAMANT and is based on the following paper:
 
