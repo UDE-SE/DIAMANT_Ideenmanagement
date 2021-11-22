@@ -1,0 +1,40 @@
+= Rest Api Doc
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:highlightjs-theme: github
+:toc: left
+:toclevels: 2
+:sectlinks:
+:sectnums:
+
+Folgende Methoden sind verfügbar in Version {version} verfügbar:
+
+## Speichern von Challenges
+include::{snippets}/challenge-controller-test/save-challenge/auto-section.adoc[]
+include::{snippets}/challenge-attachment-controller-test/save-attachment/auto-section.adoc[]
+
+## Abfragen von Challenges
+include::{snippets}/challenge-controller-test/get-challenge-preview/auto-section.adoc[]
+include::{snippets}/challenge-controller-test/get-challenge-details/auto-section.adoc[]
+include::{snippets}/challenge-attachment-controller-test/get-attachment-with-user/auto-section.adoc[]
+
+## Speichern von Ideen
+include::{snippets}/idea-controller-test/save-idea/auto-section.adoc[]
+include::{snippets}/idea-attachment-controller-test/save-attachment/auto-section.adoc[]
+
+## Abfragen von Ideen
+include::{snippets}/idea-controller-test/get-idea-details/auto-section.adoc[]
+include::{snippets}/idea-attachment-controller-test/get-attachment/auto-section.adoc[]
+
+## Update von Ideen
+include::{snippets}/idea-controller-test/update-status-field-to-submitted/auto-section.adoc[]
+include::{snippets}/idea-controller-test/update-status-field-to-ready-for-vote/auto-section.adoc[]
+
+## Votings speichern
+include::{snippets}/idea-controller-test/save-vote/auto-section.adoc[]
+
+## Chat-Nachrichten
+include::{snippets}/chat-controller-test/save-team-chat-message/auto-section.adoc[]
+include::{snippets}/chat-controller-test/save-referees-chat-message/auto-section.adoc[]
+include::{snippets}/chat-controller-test/save-team-and-referees-chat-message/auto-section.adoc[]

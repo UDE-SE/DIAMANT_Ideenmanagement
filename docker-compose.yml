@@ -1,0 +1,67 @@
+version: '3'
+services:
+  keycloak_db:
+    image: postgres:13.3-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=${KEYCLOAK_DB_USER}
+      - POSTGRES_PASSWORD=${KEYCLOAK_DB_PASSWORD}
+      - POSTGRES_CREATE_DATABASES=keycloak
+    volumes:
+      # - ./data/keycloak_db/data:/var/lib/postgresql/data
+      - ./data/keycloak_db/init_script:/docker-entrypoint-initdb.d
+  backend_db:
+    image: mongo:4.4.6-bionic
+    restart: always
+    #volumes:
+    #  - ./data/mongodb:/data/db
+  keycloak:
+    image: jboss/keycloak:14.0.0
+    restart: always
+    depends_on:
+      - keycloak_db
+    environment:
+      - DB_VENDOR=POSTGRES
+      - DB_ADDR=keycloak_db
+      - DB_DATABASE=keycloak
+      - DB_USER=${KEYCLOAK_DB_USER}
+      - DB_PASSWORD=${KEYCLOAK_DB_PASSWORD}
+      - DB_SCHEMA=public
+      - KEYCLOAK_USER=${KEYCLOAK_ADMIN_USER}
+      - KEYCLOAK_PASSWORD=${KEYCLOAK_ADMIN_PASSWORD}
+      - KEYCLOAK_IMPORT=/tmp/keycloak_diamant_realm.json
+      # - PROXY_ADDRESS_FORWARDING=true
+    volumes:
+      - ./data/keycloak/keycloak_diamant_realm.json:/tmp/keycloak_diamant_realm.json
+      - ./data/keycloak/theme/diamant_theme:/opt/jboss/keycloak/themes/diamanttheme
+    ports:
+    - 9090:8080
+  backend:
+    build:  backend/.
+    restart: always
+    depends_on:
+      - backend_db
+      - keycloak
+    environment:
+      - SERVER_PORT=8181
+      - SPRING_DATA_MONGODB_DATABASE=diamant_challenge
+      - SPRING_DATA_MONGODB_HOST=backend_db
+      - KEYCLOAK_AUTH-SERVER-URL=${KEYCLOAK_AUTH_URL}
+      - KEYCLOAK_CLIENT_ID=${KEYCLOAK_BACKEND_CLIENT_NAME}
+      - KEYCLOAK_CLIENT_PASSWORD=${KEYCLOAK_BACKEND_CLIENT_PASSWORD}
+      - APP_SERVER_BASE_URL=${BACKEND_SERVER_URL}
+      - APP_INVITATION_SIGN_SECRET=${BACKEND_INVITATION_JWT_SECRET}
+    ports:
+    - 8181:8181
+  frontend:
+    build:
+      context: frontend/.
+      args:
+        VUE_APP_KEYCLOAK_URL: ${KEYCLOAK_AUTH_URL}
+        VUE_APP_API_ENDPOINT: ${BACKEND_SERVER_URL}/api/
+    restart: always
+    depends_on:
+      - keycloak
+      - backend
+    ports:
+    - 8080:80

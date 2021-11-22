@@ -1,0 +1,8 @@
+.gradle
+build
+gradle
+out
+*.iml
+Dockerfile
+gradlew
+gradlew.bat
