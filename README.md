@@ -4,7 +4,7 @@ This application was developed as part of the research project DIAMANT and is ba
 
 Ruiner C., Hagemann V., Hesenius M., Klumpp M. (2020) _Digitales Ideenmanagement als Mitbestimmung 4.0? Chancen und Herausforderungen der Partizipation von Mitarbeitenden in betrieblichen Veränderungsprozessen_. In: Bader V., Kaiser S. (eds) Arbeit in der Data Society. Zukunftsfähige Unternehmensführung in Forschung und Praxis. Springer Gabler, Wiesbaden. [https://doi.org/10.1007/978-3-658-32276-2_15](https://doi.org/10.1007/978-3-658-32276-2_15)
 
-The project DIAMANT was funded by the Federal Ministry of Labor and Social Affairs of Germany under grants EXP.00.00124.19 and EXP.00.00014.18 as part of the ![INQA initiative](https://inqa.de).
+The project DIAMANT was funded by the Federal Ministry of Labor and Social Affairs of Germany under grants EXP.00.00124.19 and EXP.00.00014.18 as part of the [INQA initiative](https://inqa.de).
 
 This application's core idea is that companies can ask their employees for possible solutions for a certain problem (so called 'challenge' in our tool)
 ![creation of a new challenge](./data/documentation/images/create_challenge.png)
